@@ -1,11 +1,10 @@
-index
 <div class='container px-5 px-sm-0'>
    <div class='row'>
    <div class='col-md-3'>
      <p id="notice"></p>
     <h2>User info</h2>
   <table class='table'>
-  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <th><%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", :size =>'50x60'%>
   <tbody>
   <tr>
 	  <h6><th>name</th> <th><%= @user.name %></th></h6>
@@ -26,9 +25,9 @@ index
 
   <%= form_with model:@book, local:true do |f| %>
   <label>Title</label>
-  <%= f.text_field :title, autofocus: true%>
+  <%= f.text_field :title, autofocus: true,class: 'textbox'%>
   <label>Opinion</label>
-  <%= f.text_area :body, autofocus: true%>
+  <%= f.text_area :body, autofocus: true,class: 'textbox'%>
   <%= f.submit "Create Book", class: 'btn btn-sm btn-success'%>
   <% end %>
     </div>
@@ -40,16 +39,16 @@ index
        <th>image</th>
        <th>name</th>
       </thead></tr>
-
+    <% @users.each do |user| %>
     <tr>
-      <th><%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></th>
-      <th><%= @user.name %></th>
+      <th><%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg",:size =>'50x60' %></th>
+      <th><%= user.name %></th>
       <th><th>
-          <%= link_to "show", user_path(current_user.id) %>
+          <%= link_to "Show", user_path(user.id) %>
       </th></th>
       </div>
     </tr>
-
+    <% end %>
   </table>
     </div>
   </div>
