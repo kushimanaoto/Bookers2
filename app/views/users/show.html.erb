@@ -50,6 +50,18 @@
           <%= link_to  book.title , book_path(book) %>
       </th>
       <th><%= book.body %></th>
+      <% if book.favorited_by?(current_user) %>
+      <th>
+      <%= link_to book.favorites.count, book_favorites_path(book), method: :delete, class: "fas fa-heart heart_red" %>
+      </th>
+      <% else %>
+      <th>
+        <%= link_to book.favorites.count, book_favorites_path(book), method: :post, class: "fas fa-heart" %>
+      </th>
+      <% end %>
+      <th>
+        <%=  "コメント数#{book.book_comments.count} " %>
+      </th>
     </tr>
     <% end %>
   </table>
